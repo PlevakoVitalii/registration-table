@@ -16,8 +16,8 @@ function Table() {
     <div className="wrap">
       <table>
         <thead>
-          <tr >
-            <td>___</td>
+          <tr>
+            <th>___</th>
             {tableHeader.map((key) =>
               <th key={key}>{key} </th>
             )}

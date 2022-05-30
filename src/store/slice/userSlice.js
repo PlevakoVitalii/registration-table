@@ -4,12 +4,22 @@ const userSlice = createSlice({
   name: 'users',
   initialState: {
     users: [],
+    tempUsers: {},
     tableHeader: ['id', 'text', 'Company',
       'Name', 'Additional', 'Street',
       'Country', 'IBAN', 'BIC', 'Bank Name',
       'Fax', 'E-mail', 'Birthday', 'Homepage'],
   },
   reducers: {
+    // addTempUser(state, action) {
+    //   state.tempUsers.push({
+    //     id: new Date().toISOString(),
+    //     text: action.payload.text,
+    //     'Company': 'action.payload.Company',
+    //     'Name': 'action.payload.Name',
+
+    //   });
+    // },
     addUser(state, action) {
       state.users.push({
         id: new Date().toISOString(),

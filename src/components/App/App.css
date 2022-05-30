@@ -1,11 +1,17 @@
 .App {
-  font-size: calc(2px + 2vmin);
+  font-size: 12px;
+  margin: 0px 20px 20px 20px;
 }
 
-button {
-  width: 50px;
-  height: 25px;
-  background-color: #83ba63;
-  margin: 20px;
-  border-radius: 5px;
+.open-btn {
+  display: inline-block;
+  background: #83ba63;
+  border-radius: 24px;
+  padding: 8px 16px;
+  font-weight: 400;
+  font-size: 12px;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
