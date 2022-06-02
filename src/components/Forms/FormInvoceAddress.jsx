@@ -1,9 +1,12 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { addTempUser } from "../../store/slice/userSlice";
 
 import "./Form.modules.css";
 
-const FormInvoceAddress = ({ active, setActive }) => {
+const FormInvoceAddress = ({ formActive, setFormActive, setModalActive, setNextForm }) => {
+
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -22,25 +25,19 @@ const FormInvoceAddress = ({ active, setActive }) => {
     }
   });
 
-
   const onSubmit = (data) => {
-    alert(JSON.stringify(data)); //убрать етот код
-    //Данные передать в обьект TempUsers
-
-    reset()
-    setActive(false);
-    //Переклчиться на второй попап
+    dispatch(addTempUser((data)));
+    setFormActive(false);
+    setNextForm(true);
   };
 
-  const closeForm = (data) => {
+  const closeForm = () => {
     reset()
-    setActive(false);
+    setModalActive(false);
   }
 
-
-
   return (
-    <form className="modal-form"
+    <form className={formActive ? "modal-form form-active" : "modal-form"}
       onSubmit={handleSubmit(onSubmit)}>
 
       <h3 className="modal-form-title">Invoce Address</h3>
@@ -69,7 +66,6 @@ const FormInvoceAddress = ({ active, setActive }) => {
         />
       </div>
 
-
       <div className="modal-form-field">
         <label className="modal-field-name">Street</label>
         <input
@@ -78,7 +74,6 @@ const FormInvoceAddress = ({ active, setActive }) => {
         />
       </div>
 
-
       <div className="modal-form-field">
         <label className="modal-field-name">Postal Code</label>
         <input
@@ -86,7 +81,6 @@ const FormInvoceAddress = ({ active, setActive }) => {
           className="modal-field-input"
         />
       </div>
-
 
       <div className="modal-form-field">
         <label className="modal-field-name">Country</label>
@@ -97,8 +91,12 @@ const FormInvoceAddress = ({ active, setActive }) => {
       </div>
 
       <div className="modal-form-button-container">
-        <button className="modal-form-button" type="reset" onClick={() => closeForm()}>Cancel</button>
-        <button className="modal-form-button modal-form-button-active" disabled={!isValid}>Next</button>
+        <button className="modal-form-button"
+          onClick={() => closeForm()}
+        >Cancel</button>
+        <button
+          className="modal-form-button modal-form-button-active"
+        >Next</button>
       </div>
     </form>
   );

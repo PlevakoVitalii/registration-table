@@ -2,10 +2,9 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { addUser } from "../../store/slice/userSlice";
-// import FormBankData from "../Forms/FormBankData";
-// import FormContact from "../Forms/FormContact";
+import FormBankData from "../Forms/FormBankData";
+import FormContact from "../Forms/FormContact";
 import FormInvoceAddress from "../Forms/FormInvoceAddress";
-// import Form from "../Forms/FormInvoceAddress";
 import Modal from "../modal/Modal";
 
 import Table from "../table/Table.jsx";
@@ -16,6 +15,9 @@ function App() {
   const dispatch = useDispatch();
 
   const [modalActive, setModalActive] = useState(false);
+  const [formInvoceAddressActive, setFormInvoceAddressActive] = useState(true);
+  const [formBankDataActive, setFormBankDataActive] = useState(false);
+  const [formContactActive, setFormContactActive] = useState(false);
 
   function handleAction() {
     if (text.trim().length) {
@@ -40,10 +42,33 @@ function App() {
 
       <Table />
 
-      <Modal active={modalActive} setActive={setModalActive}>
-        <FormInvoceAddress active={modalActive} setActive={setModalActive} />
-        {/* <FormBankData active={modalActive} setActive={setModalActive} />
-        <FormContact active={modalActive} setActive={setModalActive} /> */}
+      <Modal modalActive={modalActive} setModalActive={setModalActive}>
+        {formInvoceAddressActive && (
+          <FormInvoceAddress
+            setModalActive={setModalActive}
+            formActive={formInvoceAddressActive}
+            setFormActive={setFormInvoceAddressActive}
+            setNextForm={setFormBankDataActive}
+          />
+        )}
+
+        {formBankDataActive && (
+          <FormBankData
+            setModalActive={setModalActive}
+            formActive={formBankDataActive}
+            setFormActive={setFormBankDataActive}
+            setPrevForm={setFormInvoceAddressActive}
+            setNextForm={setFormContactActive}
+          />
+        )}
+        {formContactActive && (
+          <FormContact
+            setModalActive={setModalActive}
+            formActive={formContactActive}
+            setFormActive={setFormContactActive}
+            setPrevForm={setFormBankDataActive}
+          />
+        )}
       </Modal>
     </div>
   );
