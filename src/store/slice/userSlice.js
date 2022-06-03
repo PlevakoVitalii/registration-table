@@ -4,7 +4,7 @@ const userSlice = createSlice({
   name: 'users',
   initialState: {
     users: [],
-    tempUsers: [],
+    tempUsers: {},
     tableHeader: ['id', 'text', 'Company',
       'Name', 'Additional', 'Street',
       'Country', 'IBAN', 'BIC', 'Bank Name',
@@ -15,8 +15,9 @@ const userSlice = createSlice({
       state.tempUsers = { ...state.tempUsers, ...action.payload }
       alert((JSON.stringify(state.tempUsers)));
     },
-    clearTempUser(state, action) {
-      state.tempUsers = {}
+    clearTempUser(state) {
+      state.tempUsers = {};
+
     },
     addUser(state, action) {
       state.users.push({

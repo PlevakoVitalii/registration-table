@@ -15,7 +15,7 @@ function App() {
   const dispatch = useDispatch();
 
   const [modalActive, setModalActive] = useState(false);
-  const [formInvoceAddressActive, setFormInvoceAddressActive] = useState(true);
+  const [formInvoceAddressActive, setFormInvoceAddressActive] = useState(false);
   const [formBankDataActive, setFormBankDataActive] = useState(false);
   const [formContactActive, setFormContactActive] = useState(false);
 
@@ -26,9 +26,16 @@ function App() {
     }
   }
 
+  function openForm() {
+    setModalActive(true);
+    setFormInvoceAddressActive(true);
+    setFormBankDataActive(false);
+    setFormContactActive(false);
+  }
+
   return (
     <div className="App">
-      <button className="open-btn" onClick={() => setModalActive(true)}>
+      <button className="open-btn" onClick={() => openForm()}>
         <span>Add</span>
       </button>
       <label>

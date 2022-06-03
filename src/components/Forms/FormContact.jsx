@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { addTempUser } from "../../store/slice/userSlice";
+import { addTempUser, clearTempUser } from "../../store/slice/userSlice";
 
 import "./Form.modules.css";
 
@@ -26,6 +26,7 @@ const FormContact = ({ formActive, setFormActive, setModalActive, setPrevForm })
   const onSubmit = (data) => {
     dispatch(addTempUser((data)));
     setFormActive(false);
+    setModalActive(false);
   };
 
   const openPrevForm = () => {
@@ -36,8 +37,11 @@ const FormContact = ({ formActive, setFormActive, setModalActive, setPrevForm })
   const closeForm = () => {
     reset()
     setModalActive(false);
+    clearTempUser();
   }
 
+  //Зберегти данні при повернені попереднього вікна 
+  //Скопіювати данні із TempUser in User після закриття останнього вікна
   return (
     <form className={formActive ? "modal-form form-active" : "modal-form"}
       onSubmit={handleSubmit(onSubmit)}>

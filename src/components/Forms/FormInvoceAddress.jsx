@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { addTempUser } from "../../store/slice/userSlice";
+import { addTempUser, clearTempUser } from "../../store/slice/userSlice";
 
 import "./Form.modules.css";
 
@@ -34,6 +34,7 @@ const FormInvoceAddress = ({ formActive, setFormActive, setModalActive, setNextF
   const closeForm = () => {
     reset()
     setModalActive(false);
+    clearTempUser();
   }
 
   return (
