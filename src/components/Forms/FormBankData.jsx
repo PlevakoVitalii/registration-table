@@ -36,7 +36,7 @@ const FormBankData = ({ formActive, setFormActive, setModalActive, setPrevForm, 
   const closeForm = () => {
     reset()
     setModalActive(false);
-    clearTempUser();
+    dispatch(clearTempUser());
   }
 
   return (

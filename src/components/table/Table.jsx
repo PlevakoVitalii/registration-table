@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
-
 import { useDispatch } from "react-redux";
+
 import { removeUser } from "../../store/slice/userSlice";
 
-import "./Table.css";
 
 import { IoTrashSharp } from "react-icons/io5";
+
+import "./Table.css";
 
 function Table() {
   const users = useSelector((state) => state.users.users);
@@ -17,7 +18,7 @@ function Table() {
       <table>
         <thead>
           <tr>
-            <th>___</th>
+            <th style={{ color: "#376b8d" }}>___</th>
             {tableHeader.map((key) =>
               <th key={key}>{key} </th>
             )}
@@ -32,7 +33,7 @@ function Table() {
                 />
               </td>
               {Object.values(user).map((val) => (
-                <td key={val}>{val}</td>
+                <td key={Math.random()}>{val}</td>
               ))}
             </tr>
           ))}

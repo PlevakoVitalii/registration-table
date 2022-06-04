@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { addTempUser, clearTempUser } from "../../store/slice/userSlice";
+import { addTempUser, addUser, clearTempUser } from "../../store/slice/userSlice";
 
 import "./Form.modules.css";
 
@@ -12,7 +12,7 @@ const FormContact = ({ formActive, setFormActive, setModalActive, setPrevForm })
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid }
+    formState: { errors }
   } = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -27,6 +27,8 @@ const FormContact = ({ formActive, setFormActive, setModalActive, setPrevForm })
     dispatch(addTempUser((data)));
     setFormActive(false);
     setModalActive(false);
+    dispatch(addUser());
+    dispatch(clearTempUser());
   };
 
   const openPrevForm = () => {
@@ -37,11 +39,9 @@ const FormContact = ({ formActive, setFormActive, setModalActive, setPrevForm })
   const closeForm = () => {
     reset()
     setModalActive(false);
-    clearTempUser();
+    dispatch(clearTempUser());
   }
 
-  //Зберегти данні при повернені попереднього вікна 
-  //Скопіювати данні із TempUser in User після закриття останнього вікна
   return (
     <form className={formActive ? "modal-form form-active" : "modal-form"}
       onSubmit={handleSubmit(onSubmit)}>
@@ -57,10 +57,13 @@ const FormContact = ({ formActive, setFormActive, setModalActive, setPrevForm })
       <div className="modal-form-field">
         <label className="modal-field-name">E-mail </label>
         <input
-          {...register("E_mail", { required: true })}
+          {...register("E_mail", {
+            pattern: /[A-Za-z0-9]+@[a-z]+\.[a-z]{2,3}/
+          })}
           className="modal-field-input"
         />
       </div>
+      {errors.E_mail && <p>Please enter a valid email address</p>}
 
       <div className="modal-form-field">
         <label className="modal-field-name">Birthday</label>
@@ -82,7 +85,7 @@ const FormContact = ({ formActive, setFormActive, setModalActive, setPrevForm })
         <button className="modal-form-button" type="reset"
           onClick={() => closeForm()}
         >Cancel</button>
-        <button className="modal-form-button modal-form-button-active"
+        <button className="modal-form-button "
           onClick={() => openPrevForm()}>Previous</button>
         <button className="modal-form-button modal-form-button-active" >Save</button>
       </div>

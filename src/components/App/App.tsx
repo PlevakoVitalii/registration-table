@@ -1,30 +1,18 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-
-import { addUser } from "../../store/slice/userSlice";
-import FormBankData from "../Forms/FormBankData";
-import FormContact from "../Forms/FormContact";
-import FormInvoceAddress from "../Forms/FormInvoceAddress";
-import Modal from "../modal/Modal";
 
 import Table from "../table/Table.jsx";
+import Modal from "../modal/Modal";
+import FormInvoceAddress from "../Forms/FormInvoceAddress";
+import FormBankData from "../Forms/FormBankData";
+import FormContact from "../Forms/FormContact";
+
 import "./App.css";
 
 function App() {
-  const [text, setText] = useState("");
-  const dispatch = useDispatch();
-
   const [modalActive, setModalActive] = useState(false);
   const [formInvoceAddressActive, setFormInvoceAddressActive] = useState(false);
   const [formBankDataActive, setFormBankDataActive] = useState(false);
   const [formContactActive, setFormContactActive] = useState(false);
-
-  function handleAction() {
-    if (text.trim().length) {
-      dispatch(addUser({ text }));
-      setText("");
-    }
-  }
 
   function openForm() {
     setModalActive(true);
@@ -38,17 +26,7 @@ function App() {
       <button className="open-btn" onClick={() => openForm()}>
         <span>Add</span>
       </button>
-      <label>
-        <input
-          placeholder="new todo"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <button onClick={handleAction}>Add</button>
-      </label>
-
       <Table />
-
       <Modal modalActive={modalActive} setModalActive={setModalActive}>
         {formInvoceAddressActive && (
           <FormInvoceAddress
