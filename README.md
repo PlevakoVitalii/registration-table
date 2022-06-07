@@ -1,14 +1,15 @@
 ## Registration-table
 
-![](https://github.com/PlevakoVitalii/star-wars-react-app/blob/master/readme-image.png)
+![](https://github.com/PlevakoVitalii/registration-table/blob/master/registration-table.png)
 
-Deployed registration-table here [Registration-table](https://plevakovitalii.github.io/star-wars-react-app/star-wars-react/).
+Deployed registration-table here [Registration-table](https://singular-entremet-089d0b.netlify.app/).
 
 Implemented functionality:
 
 - the table contains the data stored in the Store (use @reduxjs/tookit to store and manage the data);
 - popup implemented using react-hook-form;
-- Application typed with TypeScript.
+- application typed with TypeScript.
+- used Netlify for deployment. 
 
 In this project I mastered:
 

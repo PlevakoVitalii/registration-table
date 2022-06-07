@@ -10,9 +10,9 @@ import "./Form.modules.css";
 
 interface FormContactProps {
   formActive: boolean;
-  setFormActive: Function;
-  setModalActive: Function;
-  setPrevForm: Function;
+  setFormActive: (props: boolean) => void;
+  setModalActive: (props: boolean) => void;
+  setPrevForm: (props: boolean) => void;
 }
 
 const FormContact: React.FC<FormContactProps> = ({
