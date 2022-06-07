@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Table from "../table/Table.jsx";
+import Table from "../table/Table";
 import Modal from "../modal/Modal";
 import FormInvoceAddress from "../Forms/FormInvoceAddress";
 import FormBankData from "../Forms/FormBankData";

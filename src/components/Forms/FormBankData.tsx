@@ -1,52 +1,68 @@
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../hook/hook";
 import { addTempUser, clearTempUser } from "../../store/slice/userSlice";
 
 import "./Form.modules.css";
 
-const FormBankData = ({ formActive, setFormActive, setModalActive, setPrevForm, setNextForm }) => {
+interface FormBankDataProps {
+  formActive: boolean;
+  setFormActive: Function;
+  setModalActive: Function;
+  setPrevForm: Function;
+  setNextForm: Function;
+}
 
-  const dispatch = useDispatch();
+const FormBankData: React.FC<FormBankDataProps> = ({
+  formActive,
+  setFormActive,
+  setModalActive,
+  setPrevForm,
+  setNextForm,
+}) => {
+  const dispatch = useAppDispatch();
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
     mode: "onBlur",
     defaultValues: {
       IBAN: "",
       BIC: "",
-      'Bank_Name': "",
-    }
+      Bank_Name: "",
+    },
   });
 
-  const onSubmit = (data) => {
-    dispatch(addTempUser((data)));
+  const onSubmit = (data: Object) => {
+    dispatch(addTempUser(data));
     setFormActive(false);
     setNextForm(true);
   };
 
   const openPrevForm = () => {
     setFormActive(false);
-    setPrevForm(true)
-  }
+    setPrevForm(true);
+  };
 
   const closeForm = () => {
-    reset()
+    reset();
     setModalActive(false);
     dispatch(clearTempUser());
-  }
+  };
 
   return (
-    <form className={formActive ? "modal-form form-active" : "modal-form"}
-      onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={formActive ? "modal-form form-active" : "modal-form"}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <h3 className="modal-form-title">Bank Data</h3>
 
       <div className="modal-form-field">
         <label className="modal-field-name">IBAN *</label>
-        <input {...register("IBAN", { required: true })}
+        <input
+          {...register("IBAN", { required: true })}
           className="modal-field-input"
         />
       </div>
@@ -71,12 +87,19 @@ const FormBankData = ({ formActive, setFormActive, setModalActive, setPrevForm, 
       {errors.Bank_Name && !errors.BIC && <p>This field is required</p>}
 
       <div className="modal-form-button-container">
-        <button className="modal-form-button" type="reset"
+        <button
+          className="modal-form-button"
+          type="reset"
           onClick={() => closeForm()}
-        >Cancel</button>
-        <button className="modal-form-button"
-          onClick={() => openPrevForm()}>Previous</button>
-        <button className="modal-form-button modal-form-button-active">Next</button>
+        >
+          Cancel
+        </button>
+        <button className="modal-form-button" onClick={() => openPrevForm()}>
+          Previous
+        </button>
+        <button className="modal-form-button modal-form-button-active">
+          Next
+        </button>
       </div>
     </form>
   );

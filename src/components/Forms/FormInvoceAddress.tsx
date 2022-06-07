@@ -1,20 +1,31 @@
 import { useForm } from "react-hook-form";
 
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../hook/hook";
 
 import { addTempUser, clearTempUser } from "../../store/slice/userSlice";
 
 import "./Form.modules.css";
 
-const FormInvoceAddress = ({ formActive, setFormActive, setModalActive, setNextForm }) => {
+interface FormInvoceAddressProps {
+  formActive: boolean;
+  setFormActive: Function;
+  setModalActive: Function;
+  setNextForm: Function;
+}
 
-  const dispatch = useDispatch();
+const FormInvoceAddress: React.FC<FormInvoceAddressProps> = ({
+  formActive,
+  setFormActive,
+  setModalActive,
+  setNextForm,
+}) => {
+  const dispatch = useAppDispatch();
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -22,31 +33,33 @@ const FormInvoceAddress = ({ formActive, setFormActive, setModalActive, setNextF
       Name: "",
       Additional: "",
       Street: "",
-      'Postal Code': "",
+      "Postal Code": "",
       Country: "",
-    }
+    },
   });
 
-  const onSubmit = (data) => {
-    dispatch(addTempUser((data)));
+  const onSubmit = (data: Object) => {
+    dispatch(addTempUser(data));
     setFormActive(false);
     setNextForm(true);
   };
 
   const closeForm = () => {
-    reset()
+    reset();
     setModalActive(false);
     clearTempUser();
-  }
+  };
 
   return (
-    <form className={formActive ? "modal-form form-active" : "modal-form"}
-      onSubmit={handleSubmit(onSubmit)}>
-
+    <form
+      className={formActive ? "modal-form form-active" : "modal-form"}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <h3 className="modal-form-title">Invoce Address</h3>
       <div className="modal-form-field">
         <label className="modal-field-name">Company *</label>
-        <input {...register("Company", { required: true })}
+        <input
+          {...register("Company", { required: true })}
           className="modal-field-input"
         />
       </div>
@@ -63,43 +76,31 @@ const FormInvoceAddress = ({ formActive, setFormActive, setModalActive, setNextF
 
       <div className="modal-form-field">
         <label className="modal-field-name">Additional</label>
-        <input
-          {...register("Additional")}
-          className="modal-field-input"
-        />
+        <input {...register("Additional")} className="modal-field-input" />
       </div>
 
       <div className="modal-form-field">
         <label className="modal-field-name">Street</label>
-        <input
-          {...register("Street")}
-          className="modal-field-input"
-        />
+        <input {...register("Street")} className="modal-field-input" />
       </div>
 
       <div className="modal-form-field">
         <label className="modal-field-name">Postal Code</label>
-        <input
-          {...register("Postal Code")}
-          className="modal-field-input"
-        />
+        <input {...register("Postal Code")} className="modal-field-input" />
       </div>
 
       <div className="modal-form-field">
         <label className="modal-field-name">Country</label>
-        <input
-          {...register("Country")}
-          className="modal-field-input"
-        />
+        <input {...register("Country")} className="modal-field-input" />
       </div>
 
       <div className="modal-form-button-container">
-        <button className="modal-form-button"
-          onClick={() => closeForm()}
-        >Cancel</button>
-        <button
-          className="modal-form-button modal-form-button-active"
-        >Next</button>
+        <button className="modal-form-button" onClick={() => closeForm()}>
+          Cancel
+        </button>
+        <button className="modal-form-button modal-form-button-active">
+          Next
+        </button>
       </div>
     </form>
   );

@@ -20,6 +20,7 @@
   width: 370px;
   padding: 0;
   position: relative;
+  zoom: 1.25;
 }
 .close-btn {
   position: absolute;
