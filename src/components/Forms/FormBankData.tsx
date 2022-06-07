@@ -6,10 +6,10 @@ import "./Form.modules.css";
 
 interface FormBankDataProps {
   formActive: boolean;
-  setFormActive: Function;
-  setModalActive: Function;
-  setPrevForm: Function;
-  setNextForm: Function;
+  setFormActive: (props: boolean) => void;
+  setModalActive: (props: boolean) => void;
+  setPrevForm: (props: boolean) => void;
+  setNextForm: (props: boolean) => void;
 }
 
 const FormBankData: React.FC<FormBankDataProps> = ({

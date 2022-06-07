@@ -7,7 +7,7 @@ import { IoTrashSharp } from "react-icons/io5";
 
 import "./Table.css";
 
-function Table() {
+const Table: React.FC = () => {
   const users = useAppSelector((state) => state.users.users);
   const tableHeader = useAppSelector((state) => state.users.tableHeader);
   const dispatch = useAppDispatch();
@@ -42,6 +42,6 @@ function Table() {
       </table>
     </div>
   );
-}
+};
 
 export default Table;

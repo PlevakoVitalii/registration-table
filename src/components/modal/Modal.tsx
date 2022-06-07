@@ -4,7 +4,7 @@ import "./Modal.css";
 
 interface ModalProps {
   modalActive: boolean;
-  setModalActive: Function;
+  setModalActive: (props: boolean) => void;
   children: React.ReactNode;
 }
 

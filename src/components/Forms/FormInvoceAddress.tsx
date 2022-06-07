@@ -8,9 +8,9 @@ import "./Form.modules.css";
 
 interface FormInvoceAddressProps {
   formActive: boolean;
-  setFormActive: Function;
-  setModalActive: Function;
-  setNextForm: Function;
+  setFormActive: (props: boolean) => void;
+  setModalActive: (props: boolean) => void;
+  setNextForm: (props: boolean) => void;
 }
 
 const FormInvoceAddress: React.FC<FormInvoceAddressProps> = ({
